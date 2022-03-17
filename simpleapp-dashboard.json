@@ -1,0 +1,186 @@
+{
+	"dashboard": {
+		"annotations": {
+			"list": [{
+				"builtIn": 1,
+				"datasource": "-- Grafana --",
+				"enable": true,
+				"hide": true,
+				"iconColor": "rgba(0, 211, 255, 1)",
+				"name": "Annotations & Alerts",
+				"target": {
+					"limit": 100,
+					"matchAny": false,
+					"tags": [],
+					"type": "dashboard"
+				},
+				"type": "dashboard"
+			}]
+		},
+		"editable": true,
+		"fiscalYearStartMonth": 0,
+		"graphTooltip": 0,
+		"id": 1,
+		"links": [],
+		"liveNow": false,
+		"panels": [{
+				"datasource": {
+					"type": "loki",
+					"uid": "P8E80F9AEF21F6940"
+				},
+				"gridPos": {
+					"h": 8,
+					"w": 12,
+					"x": 0,
+					"y": 0
+				},
+				"id": 4,
+				"options": {
+					"dedupStrategy": "none",
+					"enableLogDetails": true,
+					"prettifyLogMessage": false,
+					"showCommonLabels": false,
+					"showLabels": false,
+					"showTime": false,
+					"sortOrder": "Descending",
+					"wrapLogMessage": false
+				},
+				"targets": [{
+					"datasource": {
+						"type": "loki",
+						"uid": "P8E80F9AEF21F6940"
+					},
+					"expr": "{container=\"simpleapp-python\"}",
+					"refId": "A"
+				}],
+				"title": "Logs",
+				"transparent": true,
+				"type": "logs"
+			},
+			{
+				"datasource": {
+					"type": "prometheus",
+					"uid": "PBFA97CFB590B2093"
+				},
+				"fieldConfig": {
+					"defaults": {
+						"color": {
+							"mode": "palette-classic"
+						},
+						"custom": {
+							"axisLabel": "",
+							"axisPlacement": "auto",
+							"barAlignment": 0,
+							"drawStyle": "line",
+							"fillOpacity": 0,
+							"gradientMode": "none",
+							"hideFrom": {
+								"legend": false,
+								"tooltip": false,
+								"viz": false
+							},
+							"lineInterpolation": "linear",
+							"lineWidth": 1,
+							"pointSize": 5,
+							"scaleDistribution": {
+								"type": "linear"
+							},
+							"showPoints": "auto",
+							"spanNulls": false,
+							"stacking": {
+								"group": "A",
+								"mode": "none"
+							},
+							"thresholdsStyle": {
+								"mode": "off"
+							}
+						},
+						"mappings": [],
+						"thresholds": {
+							"mode": "absolute",
+							"steps": [{
+									"color": "green",
+									"value": null
+								},
+								{
+									"color": "red",
+									"value": 80
+								}
+							]
+						}
+					},
+					"overrides": [{
+						"__systemRef": "hideSeriesFrom",
+						"matcher": {
+							"id": "byNames",
+							"options": {
+								"mode": "exclude",
+								"names": [
+									"simpleapp-5c5669cb85-n9kzk"
+								],
+								"prefix": "All except:",
+								"readOnly": true
+							}
+						},
+						"properties": [{
+							"id": "custom.hideFrom",
+							"value": {
+								"legend": false,
+								"tooltip": false,
+								"viz": true
+							}
+						}]
+					}]
+				},
+				"gridPos": {
+					"h": 13,
+					"w": 23,
+					"x": 0,
+					"y": 8
+				},
+				"id": 2,
+				"options": {
+					"legend": {
+						"calcs": [],
+						"displayMode": "list",
+						"placement": "bottom"
+					},
+					"tooltip": {
+						"mode": "single"
+					}
+				},
+				"targets": [{
+					"datasource": {
+						"type": "prometheus",
+						"uid": "PBFA97CFB590B2093"
+					},
+					"exemplar": true,
+					"expr": "container_memory_rss{pod=~\"simpleapp.*\"}",
+					"interval": "",
+					"legendFormat": "{{pod}}",
+					"refId": "A"
+				}],
+				"title": "Memory RSS",
+				"transparent": true,
+				"type": "timeseries"
+			}
+		],
+		"refresh": "",
+		"schemaVersion": 34,
+		"style": "dark",
+		"tags": [],
+		"templating": {
+			"list": []
+		},
+		"time": {
+			"from": "now-15m",
+			"to": "now"
+		},
+		"timepicker": {},
+		"timezone": "",
+		"title": "SimpleApp",
+		"uid": "5H4XK5Enk",
+		"version": 4,
+		"weekStart": ""
+	}
+}

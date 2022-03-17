@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: simpleapp
+  namespace: default
+  labels:
+    app: simpleapp
+spec:
+  ports:
+    - protocol: TCP
+      port: 8008
+      targetPort: 8008
+  selector:
+    app: simpleapp
+  type:
+    LoadBalancer

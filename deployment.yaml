@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simpleapp
+  namespace: default
+  labels:
+    app: simpleapp  
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simpleapp
+  template:
+    metadata:      
+      labels:
+        app: simpleapp
+    spec:
+      containers:
+        - name: simpleapp-python
+          image: simpleapp-python:1          
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8008
+          envFrom:
+          - configMapRef:
+              name: simpleapp-cm          
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst      
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
